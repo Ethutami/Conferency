@@ -2,10 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import Logo from "@/public/logo.png";
+import Logo from "./logo";
 
 const Navbar: React.FC = () => {
     const pathname = usePathname();
@@ -17,11 +16,9 @@ const Navbar: React.FC = () => {
     ];
 
     return (
-        <header className="w-full bg-white shadow-sm">
-            <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-2">
-                <div className="flex items-center space-x-2">
-                    <Image src={Logo} alt="Conferency" width={278} height={68} />
-                </div>
+        <header className="w-full shadow-sm px-20">
+            <div className="flex items-center justify-between">
+                <Logo />
                 <div className="flex-1 mx-6">
                     <div className="relative">
                         <input
