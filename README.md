@@ -58,7 +58,7 @@ Conferency offers a streamlined, user-friendly experience tailored for event org
 3. Run the development server  
 
 ```bash
-git clone https://github.com/your-username/conferency.git
+git clone https://github.com/Ethutami/Conferency.git
 cd conferency
 npm install
 npm run dev
