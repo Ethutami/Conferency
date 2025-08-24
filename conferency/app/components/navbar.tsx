@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import Logo from "./logo";
-// import DropDownMenu from "./dropdown-menu";
+import DropDownMenu from "./dropdwn-menu";
 
 const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
 
     return (
         <>
-            <header className="w-full shadow-sm dark:shadow-[#FF8400] py-2 px-5 md:px-10 lg:px-20 ">
+            <header className="w-full shadow-none md:shadow-sm dark:shadow-[#FF8400] py-2 px-5 md:px-10 lg:px-20 ">
                 <div className="flex items-center justify-between">
                     <Logo />
                     <div className="hidden md:block flex-1 mx-4">
@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
                     </div>
                 </div>
             </header>
-            {/* <DropDownMenu isOpen={isOpen} /> */}
+            <DropDownMenu isOpen={isOpen} />
         </>
     );
 };
