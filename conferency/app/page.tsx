@@ -1,5 +1,6 @@
 import CarouselComponent from "./components/carousel";
 import Categories from "./components/categories";
+import EventCard from "./components/event-card";
 import Navbar from "./components/navbar";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
         <Categories />
       </div>
       <div className="px-4 md:px-8 lg:px-16">
+        <EventCard />
       </div>
     </div>
   );
