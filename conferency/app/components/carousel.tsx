@@ -33,6 +33,7 @@ const CarouselComponent = () => {
                                 width={800}
                                 height={400}
                                 className="object-cover w-full h-full"
+                                priority={true}
                             />
                         </SwiperSlide>
                     ))
