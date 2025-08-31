@@ -19,6 +19,17 @@
   font-size: 18px;
 }
 
+.muted-color:hover {
+  color: var(--secondary);
+}
+
+.title-section {
+  color: #091057;
+  font-weight: 800;
+  font-size: 28px;
+
+}
+
 @media (min-width: 768px) {
   .active-color {
     font-weight: 400;
@@ -29,13 +40,16 @@
     font-weight: 400;
     font-size: 14px;
   }
-
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #000000;
     --foreground: #ffffff;
+  }
+
+  .title-section {
+    color: var(--foreground);
   }
 }
 
