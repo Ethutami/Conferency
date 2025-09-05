@@ -5,6 +5,10 @@ I handled the entire development process independently — from UI/UX design in 
 
 Conferency offers a streamlined, user-friendly experience tailored for event organizers who seek an efficient and scalable digital solution.
 
+<a href="https://www.figma.com/community/file/1545661543404354525">
+  <b>Visit on Figma Community</b>
+</a>
+
 ## 📚 Table of Contents
 - [Features](#features)
 - [Tech Stack](#tech-stack)
