@@ -26,7 +26,7 @@ export default function Categories() {
         }
     }, []);
     return (
-        <div className="w-full py-4">
+        <div className="w-full py-4 border-b border-transparent shadow-md dark:shadow-[#EC8305]">
             <div className="px-4 md:px-8 lg:px-16">
                 <TitleSection title="Categories" />
             </div>
