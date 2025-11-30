@@ -7,3 +7,8 @@ export const FetchEvents = async () => {
     const res = await axios.get(url);
     return res.data.data;
 };
+
+export const FetchEventDetails = async (id: string) => {
+    const res = await axios.get(`${url}${id}`);
+    return res.data.data;
+};
