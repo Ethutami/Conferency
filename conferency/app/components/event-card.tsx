@@ -2,111 +2,53 @@
 import Image from "next/image";
 import { TitleSection } from "./titleSection";
 import { PrimaryButton } from "./button";
+import { useQuery } from "@tanstack/react-query";
+import { FetchEvents } from "@/services/api/events.api";
+import { Event } from "@/interfaces/events.interface";
+import { format } from "date-fns";
 
-export type Event = {
-    id: number;
-    title: string;
-    date: string;
-    price: string;
-    tag?: string;
-    image: string;
-};
-
-export const events: Event[] = [
-    {
-        id: 1,
-        title: "Basic Education for Beginners",
-        date: "20th November 2023",
-        price: "Rp 10.000",
-        tag: "Free Webinar",
-        image: "/event-img.png",
-    },
-    {
-        id: 2,
-        title: "Advanced JavaScript Conference",
-        date: "5th December 2023",
-        price: "Rp 25.000",
-        tag: "Paid Event",
-        image: "/event-img.png",
-    },
-    {
-        id: 3,
-        title: "UI/UX Design Workshop",
-        date: "10th December 2023",
-        price: "Rp 15.000",
-        tag: "Workshop",
-        image: "/event-img.png",
-    },
-    {
-        id: 4,
-        title: "React for Beginners",
-        date: "15th December 2023",
-        price: "Rp 20.000",
-        tag: "Bootcamp",
-        image: "/event-img.png",
-    },
-    {
-        id: 5,
-        title: "Next.js Fullstack Conference",
-        date: "20th December 2023",
-        price: "Rp 30.000",
-        tag: "Conference",
-        image: "/event-img.png",
-    },
-    {
-        id: 6,
-        title: "TypeScript Deep Dive",
-        date: "25th December 2023",
-        price: "Rp 40.000",
-        tag: "Online Class",
-        image: "/event-img.png",
-    },
-    {
-        id: 7,
-        title: "Frontend Career Talk",
-        date: "28th December 2023",
-        price: "Rp 5.000",
-        tag: "Talkshow",
-        image: "/event-img.png",
-    },
-    {
-        id: 8,
-        title: "Backend System Design",
-        date: "30th December 2023",
-        price: "Rp 35.000",
-        tag: "Workshop",
-        image: "/event-img.png",
-    },
-];
+export function formatEventDate(isoDate: string): string {
+    const date = new Date(isoDate);
+    return format(date, "do MMMM yyyy"); // 20th September 2025
+}
 
 export default function EventCard() {
+    const { data, isLoading, isError, error } = useQuery({
+        queryKey: ["events"],
+        queryFn: FetchEvents,
+    });
+
+    if (isLoading) return <div>Loading...</div>;
+    if (isError) return <div>Error: {error instanceof Error ? error.message : "Unknown error"}</div>;
     return (
         <div>
             <TitleSection title="Events" />
             <div className="grid grid-flow-row grid-cols-2 md:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
                 {
-                    events.map((item, i) => {
+                    data.map((item: Event, i: number) => {
                         return (
-                            <div key={i} className="block p-4 border-t border-[#EC8305] dark:border-[#fff] shadow-md shadow-[#EC8305] dark:shadow-[#fff] rounded-lg shadow-sm hover:shadow-md transition overflow-hidden">
+                            <div key={i} onClick={() => alert('helo')} className="
+                            block p-4 border-t border-[#EC8305] dark:border-[#fff] rounded-lg
+                            shadow-md shadow-[#EC8305] dark:shadow-[#fff] hover:shadow-md 
+                            hover:bg-orange-500/10 dark:hover:bg-orange-500/30  transition overflow-hidden">
                                 <>
                                     <div className="flex flex-col-reverse lg:flex-row">
                                         <p className="primary-title md:mr-2">
-                                            Basic Education
+                                            {item.event_name}
                                         </p>
                                         <Image
-                                            src={'/banner1.png'}
+                                            src={item.img ?? '/banner1.png'}
                                             width={100}
                                             height={100}
                                             alt="image"
                                             className="w-auto h-auto"
                                         />
                                     </div>
-                                    <p className="muted-color hover:!text-[#DBD3D3]">20th November 2023</p>
+                                    <p className="muted-color hover:!text-[#DBD3D3]">{formatEventDate(item?.start_date)}</p>
                                 </>
-                                <p className="secondary-title mt-2">Rp. 10.000</p>
+                                <p className="secondary-title mt-2">{item?.price}</p>
                                 <PrimaryButton title="Buy Now" />
                             </div>
-
                         )
                     })
                 }
