@@ -18,11 +18,11 @@ import { Voucher, voucherDummy } from "@/app/db/voucher";
 import { Review, reviewsDummy } from "@/app/db/reviews";
 
 import { FetchEventDetails } from "@/services/api/events.api";
-import { Event, EventVoucher } from "@/interfaces/events.interface";
+import { Event } from "@/interfaces/events.interface";
 
 const queryClient = new QueryClient();
 
-function FloatingTicket({ start_date, price, voucher }: { start_date: string, price: string, voucher?: EventVoucher[] }) {
+function FloatingTicket({ start_date, price }: { start_date: string, price: string, }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [termandcondition, setTermandcondition] = useState<string | null | undefined>('');
 
@@ -228,7 +228,7 @@ const Content = ({ data }: { data: Event }) => {
                                             {data?.speakers.map((item, i) => (
                                                 <div key={i} className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition cursor-pointer">
                                                     <div className="relative w-full h-48">
-                                                        <Image src="/speaker1.png" alt="Speaker" fill className="object-cover" />
+                                                        <Image src="/user.png" alt="Speaker" fill className="object-cover" />
                                                     </div>
                                                     <div className="p-4">
                                                         <h3 className="font-bold text-lg">{item?.speaker_name}</h3>
@@ -275,7 +275,7 @@ const Content = ({ data }: { data: Event }) => {
                     </section>
                 </div>
                 <div>
-                    <FloatingTicket start_date={data?.start_date} price={data?.price} voucher={data?.event_vouchers} />
+                    <FloatingTicket start_date={data?.start_date} price={data?.price} />
                 </div>
             </div>
         </div>
