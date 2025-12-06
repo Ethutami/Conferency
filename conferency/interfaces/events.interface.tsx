@@ -13,6 +13,10 @@ export interface EventVoucher {
     event_id: string;
     voucher_id: number;
 }
+interface Organizator {
+    id: string;
+    organizator_name: string;
+}
 
 export interface Event {
     id: string;
@@ -33,4 +37,5 @@ export interface Event {
     created_at: string; // ISO date string
     event_categories: EventCategory[];
     event_vouchers: EventVoucher[];
+    organizator?: Organizator;
 }
