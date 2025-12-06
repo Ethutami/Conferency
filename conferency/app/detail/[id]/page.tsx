@@ -228,7 +228,7 @@ const Content = ({ data }: { data: Event }) => {
                                             {data?.speakers.map((item, i) => (
                                                 <div key={i} className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition cursor-pointer">
                                                     <div className="relative w-full h-48">
-                                                        <Image src="/speaker1.png" alt="Speaker" fill className="object-cover" />
+                                                        <Image src="/user.png" alt="Speaker" fill className="object-cover" />
                                                     </div>
                                                     <div className="p-4">
                                                         <h3 className="font-bold text-lg">{item?.speaker_name}</h3>
