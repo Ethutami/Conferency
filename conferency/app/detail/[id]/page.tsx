@@ -22,7 +22,7 @@ import { Event, EventVoucher } from "@/interfaces/events.interface";
 
 const queryClient = new QueryClient();
 
-function FloatingTicket({ start_date, price, voucher }: { start_date: string, price: string, voucher?: EventVoucher[] }) {
+function FloatingTicket({ start_date, price, }: { start_date: string, price: string, voucher?: EventVoucher[] }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [termandcondition, setTermandcondition] = useState<string | null | undefined>('');
 
