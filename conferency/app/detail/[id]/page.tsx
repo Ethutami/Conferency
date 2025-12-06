@@ -6,18 +6,18 @@ import { useParams } from "next/navigation";
 import { FiClock, FiMapPin } from "react-icons/fi";
 import { HiOutlineCalendar } from "react-icons/hi";
 import { LiaCalendarDaySolid } from "react-icons/lia";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 
 import { PrimaryButton, SecondaryButton } from "@/app/components/button";
 import Navbar from "@/app/components/navbar";
 import { Modal } from "@/app/components/modal";
 import { capitalizeFirst } from "@/app/utilis/capitalize";
 import { formatEventDate } from "@/app/utilis/date-formater";
-import { Voucher, voucherDummy } from "@/app/db/voucher";
 
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { Voucher, voucherDummy } from "@/app/db/voucher";
+import { Review, reviewsDummy } from "@/app/db/reviews";
 
 import { FetchEventDetails } from "@/services/api/events.api";
-
 import { Event, EventVoucher } from "@/interfaces/events.interface";
 
 const queryClient = new QueryClient();
@@ -35,13 +35,11 @@ function FloatingTicket({ start_date, price, voucher }: { start_date: string, pr
                         <LiaCalendarDaySolid size={16} />
                         <span>{formatEventDate(start_date, "long")}</span>
                     </div>
-
                     {/* Price */}
                     <div className="mt-8">
                         <p className="text-gray-400 font-semibold">Price :</p>
                         <p className="text-orange-500 font-bold text-3xl mt-1">{price}</p>
                     </div>
-
                     {/* Button */}
                     <PrimaryButton title="Buy Ticket" style="w-full py-3 mt-6" />
                 </div>
@@ -55,19 +53,13 @@ function FloatingTicket({ start_date, price, voucher }: { start_date: string, pr
                                         DISCOUNT
                                     </span>
                                 </div>
-
                                 {/* Discount Info */}
                                 <p className="text-gray-400 text-sm">Flat ${discount} off*</p>
-
                                 <p className="text-orange-500 font-bold text-lg mt-1">{item?.voucher_code}</p>
-
                                 <p className="text-gray-500 text-xs mt-1">Save ${discount} on all transactions.</p>
-
                                 <a onClick={() => { setIsModalOpen(true); setTermandcondition(item?.terms_conditions) }} className="text-blue-600 underline text-xs mt-1 inline-block">
                                     *Terms & conditions
                                 </a>
-
-                                {/* Apply Button */}
                                 <button className="w-full border border-gray-300 py-2 rounded-full text-sm text-orange-500 font-semibold mt-4 hover:bg-gray-50 transition">
                                     Apply Code
                                 </button>
@@ -122,43 +114,51 @@ const Banner = ({ data }: { data: Event }) => {
         </section>
     )
 }
+
 const Content = ({ data }: { data: Event }) => {
+    const [activeTab, setActiveTab] = useState<"about" | "review" | "speakers">("about");
+
     return (
         <div className="px-4 md:px-8 lg:px-16 bg-[rgba(238,223,223,0.25)] pb-10">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 relative">
                 <div className="col-span-2 flex flex-col relative">
-                    {/* Breadcrumb */}
                     <section>
+                        {/* Breadcrumb */}
                         <div className="text-sm text-[#DBD3D3] py-4 px-6 flex gap-2">
-                            <span onClick={() => window.location.href = "/"}
-                                className="hover:text-[#DBD3D3] cursor-pointer">Home</span>
+                            <span
+                                onClick={() => window.location.href = "/"}
+                                className="hover:text-[#DBD3D3] cursor-pointer"
+                            >
+                                Home
+                            </span>
                             <span>{">"}</span>
                             <span className="hover:text-[#DBD3D3] cursor-pointer">All Category</span>
                             <span>{">"}</span>
                             <span className="font-semibold text-[#DBD3D3]">{data?.organizator?.organizator_name}</span>
                         </div>
-
                         {/* Tabs */}
                         <div className="border-b border-[#DBD3D3]">
                             <div className="flex gap-10 px-6">
-                                <button onClick={() => {
-                                    document.getElementById("description")?.scrollIntoView({ behavior: "smooth" });
-                                }} className="py-3 border-b-2 border-[#091057] font-semibold text-[#091057]">
+                                <button
+                                    onClick={() => setActiveTab("about")}
+                                    className={`py-3 font-semibold ${activeTab === "about" ? "border-b-2 border-[#091057] text-[#091057]" : "text-[#DBD3D3] hover:text-[#091057]"}`}
+                                >
                                     About
                                 </button>
-                                <button onClick={() => {
-                                    document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth" });
-                                }} className="py-3 text-[#DBD3D3] hover:text-[#091057]">
+                                <button
+                                    onClick={() => setActiveTab("review")}
+                                    className={`py-3 font-semibold ${activeTab === "review" ? "border-b-2 border-[#091057] text-[#091057]" : "text-[#DBD3D3] hover:text-[#091057]"}`}
+                                >
                                     Review
                                 </button>
-                                <button onClick={() => {
-                                    document.getElementById("speakers")?.scrollIntoView({ behavior: "smooth" });
-                                }} className="py-3 text-[#DBD3D3] hover:text-[#091057]">
+                                <button
+                                    onClick={() => setActiveTab("speakers")}
+                                    className={`py-3 font-semibold ${activeTab === "speakers" ? "border-b-2 border-[#091057] text-[#091057]" : "text-[#DBD3D3] hover:text-[#091057]"}`}
+                                >
                                     Speaker
                                 </button>
                             </div>
                         </div>
-
                         <div className="px-6 py-10">
                             <h1 className="text-4xl font-extrabold">{data?.event_name}</h1>
                             <p className="text-[#DBD3D3] mt-1">
@@ -185,13 +185,11 @@ const Content = ({ data }: { data: Event }) => {
                                     <FiMapPin size={26} className="text-orange-500" />
                                     <div>
                                         <h3 className="font-semibold">Location</h3>
-                                        {/* Kondisi Online */}
                                         {data?.location_type === "online" && (
                                             <p className="text-sm mt-1">
                                                 {capitalizeFirst(data?.location_type)}
                                             </p>
                                         )}
-                                        {/* Kondisi Offline */}
                                         {data?.location_type === "offline" && (
                                             <>
                                                 <p className="text-sm mt-1 leading-tight">
@@ -211,50 +209,72 @@ const Content = ({ data }: { data: Event }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
-                    <section id="description" className="mt-16 w-full px-6">
-                        <div className="shadow-md rounded-xl p-8">
-                            <h2 className="text-2xl font-semibold text-[#091057]">Description</h2>
-                            <div className="w-12 h-2 bg-[#091057] rounded-md mt-2 mb-8"></div>
-                            <p className="text-sm leading-relaxed">
-                                {data?.description}
-                            </p>
-                        </div>
-                    </section>
-                    <section id="speakers" className="mt-10 w-full px-6">
-                        <div className="shadow-md rounded-xl p-8">
-                            <h2 className="text-2xl font-semibold text-[#091057]">Meet Our Speakers</h2>
-                            <div className="w-12 h-2 bg-[#091057] rounded-md mt-2 mb-8"></div>
-                            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                                {data?.speakers.map((item, i) => (
-                                    <div key={i} className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition cursor-pointer">
-                                        <div className="relative w-full h-48">
-                                            <Image src="/speaker1.png" alt="Speaker" fill className="object-cover" />
-                                        </div>
-                                        <div className="p-4">
-                                            <h3 className="font-bold text-lg">{item?.speaker_name}</h3>
-                                            <p className="text-sm text-gray-600">{item?.job_title}</p>
+                        <div className="px-6">
+                            {activeTab === "about" && (
+                                <section id="description" className="mt-16 w-full">
+                                    <div className="shadow-md rounded-xl p-8">
+                                        <h2 className="text-2xl font-semibold text-[#091057]">Description</h2>
+                                        <div className="w-12 h-2 bg-[#091057] rounded-md mt-2 mb-8"></div>
+                                        <p className="text-sm leading-relaxed">{data?.description}</p>
+                                    </div>
+                                </section>
+                            )}
+                            {activeTab === "speakers" && (
+                                <section id="speakers" className="mt-10 w-full">
+                                    <div className="shadow-md rounded-xl p-8">
+                                        <h2 className="text-2xl font-semibold text-[#091057]">Meet Our Speakers</h2>
+                                        <div className="w-12 h-2 bg-[#091057] rounded-md mt-2 mb-8"></div>
+                                        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                                            {data?.speakers.map((item, i) => (
+                                                <div key={i} className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition cursor-pointer">
+                                                    <div className="relative w-full h-48">
+                                                        <Image src="/speaker1.png" alt="Speaker" fill className="object-cover" />
+                                                    </div>
+                                                    <div className="p-4">
+                                                        <h3 className="font-bold text-lg">{item?.speaker_name}</h3>
+                                                        <p className="text-sm text-gray-600">{item?.job_title}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-                    <section id="reviews" className="mt-16 w-full px-6">
-                        <div className="w-full rounded-2xl bg-white shadow-md p-6 flex flex-col gap-4 mb-10">
-                            <div className="flex justify-between items-center">
-                                <div className="flex text-yellow-400 text-xl">
-                                    {Array.from({ length: 5 }).map((_, i) => <span key={i}>★</span>)}
-                                </div>
-                                <p className="text-gray-400 text-sm">16th Nov 2022</p>
-                            </div>
-                            <p className="text-gray-600 leading-relaxed">
-                                Lorem ipsum dolor sit amet...
-                            </p>
+                                </section>
+                            )}
+                            {activeTab === "review" && (
+                                <section id="reviews" className="mt-16 w-full">
+                                    {reviewsDummy.map((review: Review) => (
+                                        <div key={review.id} className="w-full rounded-2xl bg-white shadow-md p-6 flex flex-col gap-4 mb-6">
+                                            <div className="flex justify-between items-center">
+                                                <div className="flex text-yellow-400 text-xl">
+                                                    {Array.from({ length: 5 }).map((_, i) => (
+                                                        <span key={i}>{i < review.rating ? "★" : "☆"}</span>
+                                                    ))}
+                                                </div>
+                                                <p className="text-gray-400 text-sm">
+                                                    {formatEventDate(review.date, "short")}
+                                                </p>
+                                            </div>
+                                            <p className="text-gray-600 leading-relaxed">{review.comment}</p>
+                                            <div className="flex items-center gap-3 mt-2">
+                                                {review.user_avatar && (
+                                                    <Image
+                                                        src={'/user.png'}
+                                                        alt={review.user_name}
+                                                        className="w-8 h-8 rounded-full object-cover"
+                                                        width={100}
+                                                        height={100}
+                                                    />
+                                                )}
+                                                <p className="text-gray-800 font-semibold">{review.user_name}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </section>
+                            )}
                         </div>
                     </section>
                 </div>
-                <div className="">
+                <div>
                     <FloatingTicket start_date={data?.start_date} price={data?.price} voucher={data?.event_vouchers} />
                 </div>
             </div>
