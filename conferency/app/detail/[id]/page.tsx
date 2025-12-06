@@ -1,66 +1,87 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { FiClock, FiMapPin } from "react-icons/fi";
 import { HiOutlineCalendar } from "react-icons/hi";
 import { LiaCalendarDaySolid } from "react-icons/lia";
+
 import { PrimaryButton, SecondaryButton } from "@/app/components/button";
 import Navbar from "@/app/components/navbar";
+import { Modal } from "@/app/components/modal";
 import { capitalizeFirst } from "@/app/utilis/capitalize";
 import { formatEventDate } from "@/app/utilis/date-formater";
+import { Voucher, voucherDummy } from "@/app/db/voucher";
+
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+
 import { FetchEventDetails } from "@/services/api/events.api";
-import { Event } from "@/interfaces/events.interface";
+
+import { Event, EventVoucher } from "@/interfaces/events.interface";
 
 const queryClient = new QueryClient();
 
-function FloatingTicket() {
+function FloatingTicket({ start_date, price, voucher }: { start_date: string, price: string, voucher?: EventVoucher[] }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [termandcondition, setTermandcondition] = useState<string | null | undefined>('');
+
     return (
-        <div className="sticky top-32 z-20">
-            <div className="relative w-full bg-white rounded-xl shadow-lg p-6">
+        <>
+            <div className="sticky top-32 z-20">
+                <div className="relative w-full bg-white rounded-xl shadow-lg p-6">
+                    {/* Date header */}
+                    <div className="absolute -top-0 left-0 rounded-tl-lg bg-[#024CAA] text-white px-4 py-2 flex items-center gap-2 text-sm shadow">
+                        <LiaCalendarDaySolid size={16} />
+                        <span>{formatEventDate(start_date, "long")}</span>
+                    </div>
 
-                {/* Date header */}
-                <div className="absolute -top-5 left-4 bg-orange-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm shadow">
-                    <LiaCalendarDaySolid size={16} />
-                    <span>Saturday, 20th November 2023</span>
+                    {/* Price */}
+                    <div className="mt-8">
+                        <p className="text-gray-400 font-semibold">Price :</p>
+                        <p className="text-orange-500 font-bold text-3xl mt-1">{price}</p>
+                    </div>
+
+                    {/* Button */}
+                    <PrimaryButton title="Buy Ticket" style="w-full py-3 mt-6" />
                 </div>
+                <div className="flex flex-col">
+                    {voucherDummy?.map((item: Voucher, i: number) => {
+                        const discount = item?.discount_amount || item?.discount_percent
+                        return (
+                            <div key={i} className="relative w-full bg-white rounded-xl shadow-lg p-6 mt-6">
+                                <div className="">
+                                    <span className=" text-[10px] font-bold">
+                                        DISCOUNT
+                                    </span>
+                                </div>
 
-                {/* Price */}
-                <div className="mt-8">
-                    <p className="text-gray-400 font-semibold">Price :</p>
-                    <p className="text-orange-500 font-bold text-3xl mt-1">Rp 14.000</p>
+                                {/* Discount Info */}
+                                <p className="text-gray-400 text-sm">Flat ${discount} off*</p>
+
+                                <p className="text-orange-500 font-bold text-lg mt-1">{item?.voucher_code}</p>
+
+                                <p className="text-gray-500 text-xs mt-1">Save ${discount} on all transactions.</p>
+
+                                <a onClick={() => { setIsModalOpen(true); setTermandcondition(item?.terms_conditions) }} className="text-blue-600 underline text-xs mt-1 inline-block">
+                                    *Terms & conditions
+                                </a>
+
+                                {/* Apply Button */}
+                                <button className="w-full border border-gray-300 py-2 rounded-full text-sm text-orange-500 font-semibold mt-4 hover:bg-gray-50 transition">
+                                    Apply Code
+                                </button>
+                            </div>
+                        )
+                    })}
                 </div>
-
-                {/* Button */}
-                <button className="w-full bg-[#07155A] text-white py-3 rounded-lg text-lg mt-6 hover:opacity-90 transition">
-                    Buy Ticket
-                </button>
             </div>
-            <div className="relative w-full bg-white rounded-xl shadow-lg p-6 mt-6">
-                <div className="">
-                    <span className=" text-[10px] font-bold">
-                        DISCOUNT
-                    </span>
-                </div>
-
-                {/* Discount Info */}
-                <p className="text-gray-400 text-sm">Flat $25 off*</p>
-
-                <p className="text-orange-500 font-bold text-lg mt-1">FINFIRST25</p>
-
-                <p className="text-gray-500 text-xs mt-1">Save $25 on all transactions.</p>
-
-                <a href="#" className="text-blue-600 underline text-xs mt-1 inline-block">
-                    *Terms & conditions
-                </a>
-
-                {/* Apply Button */}
-                <button className="w-full border border-gray-300 py-2 rounded-full text-sm text-orange-500 font-semibold mt-4 hover:bg-gray-50 transition">
-                    Apply Code
-                </button>
-            </div>
-        </div>
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                termandcondition={termandcondition}
+            />
+        </>
     );
 }
 
@@ -102,13 +123,10 @@ const Banner = ({ data }: { data: Event }) => {
     )
 }
 const Content = ({ data }: { data: Event }) => {
-    console.log(data);
-
     return (
         <div className="px-4 md:px-8 lg:px-16 bg-[rgba(238,223,223,0.25)] pb-10">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 relative">
                 <div className="col-span-2 flex flex-col relative">
-
                     {/* Breadcrumb */}
                     <section>
                         <div className="text-sm text-[#DBD3D3] py-4 px-6 flex gap-2">
@@ -237,9 +255,8 @@ const Content = ({ data }: { data: Event }) => {
                     </section>
                 </div>
                 <div className="">
-                    <FloatingTicket />
+                    <FloatingTicket start_date={data?.start_date} price={data?.price} voucher={data?.event_vouchers} />
                 </div>
-
             </div>
         </div>
     );
