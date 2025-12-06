@@ -18,11 +18,11 @@ import { Voucher, voucherDummy } from "@/app/db/voucher";
 import { Review, reviewsDummy } from "@/app/db/reviews";
 
 import { FetchEventDetails } from "@/services/api/events.api";
-import { Event, EventVoucher } from "@/interfaces/events.interface";
+import { Event } from "@/interfaces/events.interface";
 
 const queryClient = new QueryClient();
 
-function FloatingTicket({ start_date, price, }: { start_date: string, price: string, voucher?: EventVoucher[] }) {
+function FloatingTicket({ start_date, price }: { start_date: string, price: string, }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [termandcondition, setTermandcondition] = useState<string | null | undefined>('');
 
@@ -275,7 +275,7 @@ const Content = ({ data }: { data: Event }) => {
                     </section>
                 </div>
                 <div>
-                    <FloatingTicket start_date={data?.start_date} price={data?.price} voucher={data?.event_vouchers} />
+                    <FloatingTicket start_date={data?.start_date} price={data?.price} />
                 </div>
             </div>
         </div>
