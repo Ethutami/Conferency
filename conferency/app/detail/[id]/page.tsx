@@ -79,24 +79,24 @@ function FloatingTicket({ start_date, price }: { start_date: string, price: stri
 
 const Banner = ({ data }: { data: Event }) => {
     return (
-        <section className="w-full bg-gradient-to-l from-[#024CAA] to-[#DBD3D3] py-20 px-6">
-            <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        <section className="w-full bg-gradient-to-l from-[#024CAA] to-[#DBD3D3] py-4 md:py-16">
+            <div className="mx-auto px-4 md:px-8 lg:px-16 flex flex-col-reverse md:grid md:grid-cols-2">
                 <div className="text-left">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-blue-900 leading-tight">
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-white md:text-blue-900 leading-tight">
                         {data?.event_name}
                     </h1>
                     <p className="text-white text-md mt-4">
                         {data?.tagline}
                     </p>
-                    <div className="flex gap-4 mt-8">
+                    <div className="flex gap-4 mt-8 items-center justify-around md:justify-start">
                         <PrimaryButton title="Buy Ticket" style="px-6 py-3" />
                         <SecondaryButton title="Claim Voucher" style="px-6 py-3" />
                     </div>
-                    <div className="flex flex-row">
-                        <p className="text-[#EC8305] text-sm mt-10 font-semibold">
+                    <div className="flex flex-row mt-8 md:mt-10">
+                        <p className="text-[#EC8305] text-sm font-semibold">
                             {formatEventDate(data?.start_date, "long")}
                         </p>
-                        <p className="text-white text-sm mt-10 ">
+                        <p className="text-white text-sm ">
                             &nbsp; | {formatEventDate(data?.start_date, "time")}  | {capitalizeFirst(data?.location_type)}
                         </p>
                     </div>
@@ -119,164 +119,170 @@ const Content = ({ data }: { data: Event }) => {
     const [activeTab, setActiveTab] = useState<"about" | "review" | "speakers">("about");
 
     return (
-        <div className="px-4 md:px-8 lg:px-16 bg-[rgba(238,223,223,0.25)] pb-10">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 relative">
-                <div className="col-span-2 flex flex-col relative">
-                    <section>
-                        {/* Breadcrumb */}
-                        <div className="text-sm text-[#DBD3D3] py-4 px-6 flex gap-2">
-                            <span
-                                onClick={() => window.location.href = "/"}
-                                className="hover:text-[#DBD3D3] cursor-pointer"
-                            >
-                                Home
-                            </span>
-                            <span>{">"}</span>
-                            <span className="hover:text-[#DBD3D3] cursor-pointer">All Category</span>
-                            <span>{">"}</span>
-                            <span className="font-semibold text-[#DBD3D3]">{data?.organizator?.organizator_name}</span>
-                        </div>
-                        {/* Tabs */}
-                        <div className="border-b border-[#DBD3D3]">
-                            <div className="flex gap-10 px-6">
-                                <button
-                                    onClick={() => setActiveTab("about")}
-                                    className={`py-3 font-semibold ${activeTab === "about" ? "border-b-2 border-[#091057] text-[#091057]" : "text-[#DBD3D3] hover:text-[#091057]"}`}
-                                >
-                                    About
-                                </button>
-                                <button
-                                    onClick={() => setActiveTab("review")}
-                                    className={`py-3 font-semibold ${activeTab === "review" ? "border-b-2 border-[#091057] text-[#091057]" : "text-[#DBD3D3] hover:text-[#091057]"}`}
-                                >
-                                    Review
-                                </button>
-                                <button
-                                    onClick={() => setActiveTab("speakers")}
-                                    className={`py-3 font-semibold ${activeTab === "speakers" ? "border-b-2 border-[#091057] text-[#091057]" : "text-[#DBD3D3] hover:text-[#091057]"}`}
-                                >
-                                    Speaker
-                                </button>
+        <div className="relative grid grid-cols-1 md:grid-cols-3">
+            <section className="flex flex-col relative col-span-2 px-4">
+                {/* Breadcrumb */}
+                <div className="text-sm text-[#DBD3D3] py-4 px-6 flex gap-2">
+                    <span
+                        onClick={() => window.location.href = "/"}
+                        className="hover:text-[#DBD3D3] cursor-pointer"
+                    >
+                        Home
+                    </span>
+                    <span>{">"}</span>
+                    <span className="hover:text-[#DBD3D3] cursor-pointer">All Category</span>
+                    <span>{">"}</span>
+                    <span className="font-semibold text-[#DBD3D3]">{data?.organizator?.organizator_name}</span>
+                </div>
+                {/* Tabs */}
+                <div className="border-b border-[#DBD3D3]">
+                    <div className="flex gap-10 px-6">
+                        <button
+                            onClick={() => setActiveTab("about")}
+                            className={`py-3 font-semibold ${activeTab === "about" ? "border-b-2 border-[#091057] text-[#091057]" : "text-[#DBD3D3] hover:text-[#091057]"}`}
+                        >
+                            About
+                        </button>
+                        <button
+                            onClick={() => setActiveTab("review")}
+                            className={`py-3 font-semibold ${activeTab === "review" ? "border-b-2 border-[#091057] text-[#091057]" : "text-[#DBD3D3] hover:text-[#091057]"}`}
+                        >
+                            Review
+                        </button>
+                        <button
+                            onClick={() => setActiveTab("speakers")}
+                            className={`py-3 font-semibold ${activeTab === "speakers" ? "border-b-2 border-[#091057] text-[#091057]" : "text-[#DBD3D3] hover:text-[#091057]"}`}
+                        >
+                            Speaker
+                        </button>
+                    </div>
+                </div>
+                <div className="px-6 py-6 md:py-10">
+                    <h1 className="text-4xl font-extrabold">{data?.event_name}</h1>
+                    <p className="text-[#DBD3D3] mt-1">
+                        Organized by : {data?.organizator?.organizator_name}
+                    </p>
+                </div>
+                <div className="w-full">
+                    <div className="grid md:grid-cols-3 gap-4 md:gap-10 md:mt-10 px-6">
+                        {/* DATE */}
+                        <div className="grid grid-cols-[auto_auto_1fr] gap-3 items-start md:flex md:items-start">
+                            <HiOutlineCalendar size={28} className="text-[#EC8305] shrink-0" />
+                            {/* Title */}
+                            <h3 className="font-semibold md:hidden">Date</h3>
+                            {/* Content */}
+                            <div className="md:flex md:flex-col">
+                                <h3 className="font-semibold hidden md:block">Date</h3>
+                                <p className="text-sm mt-0 md:mt-1">
+                                    {formatEventDate(data?.start_date, "long")}
+                                </p>
                             </div>
                         </div>
-                        <div className="px-6 py-10">
-                            <h1 className="text-4xl font-extrabold">{data?.event_name}</h1>
-                            <p className="text-[#DBD3D3] mt-1">
-                                Organized by : {data?.organizator?.organizator_name}
-                            </p>
-                        </div>
-                        <div className="w-full">
-                            <div className="grid md:grid-cols-3 gap-10 mt-10 px-6">
-                                <div className="flex gap-3">
-                                    <HiOutlineCalendar size={28} className="text-[#EC8305]" />
-                                    <div>
-                                        <h3 className="font-semibold">Date</h3>
-                                        <p className="text-sm mt-1">{formatEventDate(data?.start_date, "long")}</p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-3">
-                                    <FiClock size={26} className="text-[#EC8305]" />
-                                    <div>
-                                        <h3 className="font-semibold">Time</h3>
-                                        <p className="text-sm mt-1">{formatEventDate(data?.start_date, "time")}</p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-3">
-                                    <FiMapPin size={26} className="text-orange-500" />
-                                    <div>
-                                        <h3 className="font-semibold">Location</h3>
-                                        {data?.location_type === "online" && (
-                                            <p className="text-sm mt-1">
-                                                {capitalizeFirst(data?.location_type)}
-                                            </p>
-                                        )}
-                                        {data?.location_type === "offline" && (
-                                            <>
-                                                <p className="text-sm mt-1 leading-tight">
-                                                    {data?.address}
-                                                </p>
-                                                <a
-                                                    href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-orange-500 text-sm font-medium mt-2 inline-block"
-                                                >
-                                                    View in map
-                                                </a>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
+                        {/* TIME */}
+                        <div className="grid grid-cols-[auto_auto_1fr] gap-3 items-start md:flex md:items-start">
+                            <FiClock size={26} className="text-[#EC8305] shrink-0" />
+                            <h3 className="font-semibold md:hidden">Time</h3>
+                            <div className="md:flex md:flex-col">
+                                <h3 className="font-semibold hidden md:block">Time</h3>
+                                <p className="text-sm mt-0 md:mt-1">
+                                    {formatEventDate(data?.start_date, "time")}
+                                </p>
                             </div>
                         </div>
-                        <div className="px-6">
-                            {activeTab === "about" && (
-                                <section id="description" className="mt-16 w-full">
-                                    <div className="shadow-md rounded-xl p-8">
-                                        <h2 className="text-2xl font-semibold text-[#091057]">Description</h2>
-                                        <div className="w-12 h-2 bg-[#091057] rounded-md mt-2 mb-8"></div>
-                                        <p className="text-sm leading-relaxed">{data?.description}</p>
-                                    </div>
-                                </section>
-                            )}
-                            {activeTab === "speakers" && (
-                                <section id="speakers" className="mt-10 w-full">
-                                    <div className="shadow-md rounded-xl p-8">
-                                        <h2 className="text-2xl font-semibold text-[#091057]">Meet Our Speakers</h2>
-                                        <div className="w-12 h-2 bg-[#091057] rounded-md mt-2 mb-8"></div>
-                                        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                                            {data?.speakers.map((item, i) => (
-                                                <div key={i} className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition cursor-pointer">
-                                                    <div className="relative w-full h-48">
-                                                        <Image src="/user.png" alt="Speaker" fill className="object-cover" />
-                                                    </div>
-                                                    <div className="p-4">
-                                                        <h3 className="font-bold text-lg">{item?.speaker_name}</h3>
-                                                        <p className="text-sm text-gray-600">{item?.job_title}</p>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </section>
-                            )}
-                            {activeTab === "review" && (
-                                <section id="reviews" className="mt-16 w-full">
-                                    {reviewsDummy.map((review: Review) => (
-                                        <div key={review.id} className="w-full rounded-2xl bg-white shadow-md p-6 flex flex-col gap-4 mb-6">
-                                            <div className="flex justify-between items-center">
-                                                <div className="flex text-yellow-400 text-xl">
-                                                    {Array.from({ length: 5 }).map((_, i) => (
-                                                        <span key={i}>{i < review.rating ? "★" : "☆"}</span>
-                                                    ))}
-                                                </div>
-                                                <p className="text-gray-400 text-sm">
-                                                    {formatEventDate(review.date, "short")}
-                                                </p>
-                                            </div>
-                                            <p className="text-gray-600 leading-relaxed">{review.comment}</p>
-                                            <div className="flex items-center gap-3 mt-2">
-                                                {review.user_avatar && (
-                                                    <Image
-                                                        src={'/user.png'}
-                                                        alt={review.user_name}
-                                                        className="w-8 h-8 rounded-full object-cover"
-                                                        width={100}
-                                                        height={100}
-                                                    />
-                                                )}
-                                                <p className="text-gray-800 font-semibold">{review.user_name}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </section>
-                            )}
+                        {/* LOCATION */}
+                        <div className="grid grid-cols-[auto_auto_1fr] gap-3 items-start md:flex md:items-start">
+                            <FiMapPin size={26} className="text-orange-500 shrink-0" />
+                            <h3 className="font-semibold md:hidden">Location</h3>
+                            <div className="md:flex md:flex-col">
+                                <h3 className="font-semibold hidden md:block">Location</h3>
+                                {data?.location_type === "online" && (
+                                    <p className="text-sm mt-0 md:mt-1">
+                                        {capitalizeFirst(data?.location_type)}
+                                    </p>
+                                )}
+                                {data?.location_type === "offline" && (
+                                    <>
+                                        <p className="text-sm mt-0 md:mt-1 leading-tight">
+                                            {data?.address}
+                                        </p>
+                                        <a
+                                            href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-orange-500 text-sm font-medium mt-1 inline-block"
+                                        >
+                                            View in map
+                                        </a>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {activeTab === "about" && (
+                    <section id="description" className="mt-4 md:mt-10 w-full">
+                        <div className="shadow-md rounded-xl p-8">
+                            <h2 className="text-2xl font-semibold text-[#091057]">Description</h2>
+                            <div className="w-12 h-2 bg-[#091057] rounded-md mt-2 mb-8"></div>
+                            <p className="text-sm leading-relaxed">{data?.description}</p>
                         </div>
                     </section>
-                </div>
-                <div>
-                    <FloatingTicket start_date={data?.start_date} price={data?.price} />
-                </div>
+                )}
+                {activeTab === "speakers" && (
+                    <section id="speakers" className="mt-4 md:mt-10 w-full">
+                        <div className="shadow-md rounded-xl p-8">
+                            <h2 className="text-2xl font-semibold text-[#091057]">Meet Our Speakers</h2>
+                            <div className="w-12 h-2 bg-[#091057] rounded-md mt-2 mb-8"></div>
+                            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                                {data?.speakers.map((item, i) => (
+                                    <div key={i} className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition cursor-pointer">
+                                        <div className="relative w-full h-48">
+                                            <Image src="/user.png" alt="Speaker" fill className="object-cover" />
+                                        </div>
+                                        <div className="p-4">
+                                            <h3 className="font-bold text-lg">{item?.speaker_name}</h3>
+                                            <p className="text-sm text-gray-600">{item?.job_title}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                )}
+                {activeTab === "review" && (
+                    <section id="reviews" className="mt-4 md:mt-10 w-full">
+                        {reviewsDummy.map((review: Review) => (
+                            <div key={review.id} className="w-full rounded-2xl bg-white shadow-md p-6 flex flex-col gap-4 mb-6">
+                                <div className="flex justify-between items-center">
+                                    <div className="flex text-yellow-400 text-xl">
+                                        {Array.from({ length: 5 }).map((_, i) => (
+                                            <span key={i}>{i < review.rating ? "★" : "☆"}</span>
+                                        ))}
+                                    </div>
+                                    <p className="text-gray-400 text-sm">
+                                        {formatEventDate(review.date, "short")}
+                                    </p>
+                                </div>
+                                <p className="text-gray-600 leading-relaxed">{review.comment}</p>
+                                <div className="flex items-center gap-3 mt-2">
+                                    {review.user_avatar && (
+                                        <Image
+                                            src={'/user.png'}
+                                            alt={review.user_name}
+                                            className="w-8 h-8 rounded-full object-cover"
+                                            width={100}
+                                            height={100}
+                                        />
+                                    )}
+                                    <p className="text-gray-800 font-semibold">{review.user_name}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </section>
+                )}
+            </section>
+            <div className="hidden md:block pt-2 px-0">
+                <FloatingTicket start_date={data?.start_date} price={data?.price} />
             </div>
         </div>
     );
@@ -297,7 +303,7 @@ const EventDetailContent = () => {
     if (isError) return <p>Error: {(error as Error).message}</p>;
 
     return (
-        <div className="mb-10">
+        <div className="pb-10">
             <Banner data={data} />
             <Content data={data} />
         </div>
