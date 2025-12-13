@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 export default function Home() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="relative mb-10">
+      <div className="relative pb-10">
         <Navbar />
         <div className="pt-20">
           <CarouselComponent />
