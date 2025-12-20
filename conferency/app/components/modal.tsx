@@ -1,10 +1,11 @@
 interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
-    termandcondition: string | null | undefined
+    termandcondition: string | null | undefined;
+    code: string
 }
 
-export const Modal = ({ isOpen, onClose, termandcondition }: ModalProps) => {
+export const Modal = ({ isOpen, onClose, termandcondition, code }: ModalProps) => {
     if (!isOpen) return null;
 
     return (
@@ -15,6 +16,7 @@ export const Modal = ({ isOpen, onClose, termandcondition }: ModalProps) => {
             ></div>
             <div className="bg-white rounded-lg shadow-lg p-6 z-10 w-11/12 max-w-md">
                 <h2 className="text-lg font-semibold mb-4">Term and Conditions</h2>
+                <p className="text-orange-500 font-bold text-lg mt-1">{code}</p>
                 <p className="text-gray-700 mb-4 whitespace-pre-line">
                     {termandcondition}
                 </p>
