@@ -2,18 +2,19 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import Logo from "./logo";
 import DropDownMenu from "./dropdwn-menu";
 
 const Navbar: React.FC = () => {
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
 
     const navItems = [
         { name: "Home", href: "/" },
-        { name: "Voucher", href: "/voucher" },
+        { name: "Voucher", href: "/vouchers" },
         { name: "About", href: "/about" },
     ];
 
@@ -49,15 +50,27 @@ const Navbar: React.FC = () => {
                         ))}
                     </nav>
                     <div className="hidden md:block flex items-center space-x-4">
-                        <button className="hover:bg-[#DBD3D3] rounded-full">
+                        <button
+                            onClick={() => router.push("/notifications")}
+                            className={`hover:bg-[#DBD3D3] rounded-full ${pathname === '/notifications'
+                                ? "active-color"
+                                : "text-[var(--foreground)]"
+                                }`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bell-icon lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></svg>
                         </button>
-                        <button className="hover:bg-[#DBD3D3] rounded-full">
+                        <button onClick={() => router.push("/user")} className={`hover:bg-[#DBD3D3] rounded-full ${pathname === '/user'
+                            ? "active-color"
+                            : "text-[var(--foreground)]"
+                            }`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                         </button>
                     </div>
                     <div className="block md:hidden lg:hidden flex items-center space-x-4">
-                        <button className=" hover:bg-[#DBD3D3] rounded-full">
+                        <button onClick={() => router.push("/notifications")}
+                            className={`hover:bg-[#DBD3D3] rounded-full ${pathname === '/notifications'
+                                ? "active-color"
+                                : "text-[var(--foreground)]"
+                                }`}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
                         </button>
