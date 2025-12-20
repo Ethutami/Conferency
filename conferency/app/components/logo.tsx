@@ -1,6 +1,9 @@
+import Link from "next/link"
+
 const Logo = () => {
     return (
-        <div className="flex flex-row items-center">
+        <Link
+            href={'/'} className="flex flex-row items-center">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="113.6 104 307 214"
@@ -37,7 +40,7 @@ const Logo = () => {
                 <p className="font-bold text-[24px] lg:text-[26px] md:text-[24px] text-[#091057] dark:text-[#FFFFFF]">Conferency</p>
                 <p className="font-medium text-[14px] lg:text-[16px] text-[#EC8305]">Event Management</p>
             </div>
-        </div>
+        </Link>
     )
 }
 

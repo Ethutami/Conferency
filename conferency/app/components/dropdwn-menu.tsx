@@ -10,10 +10,10 @@ interface DropDownMenuProps {
 
 const navItems = [
     { name: "Home", href: "/" },
-    { name: "Voucher", href: "/voucher" },
+    { name: "Voucher", href: "/vouchers" },
     { name: "Notifications", href: "/notifications" },
     { name: "About", href: "/about" },
-    { name: "Profile", href: "/profile" },
+    { name: "Profile", href: "/user" },
 ];
 
 const DropDownMenu: React.FC<DropDownMenuProps> = ({ isOpen }) => {
