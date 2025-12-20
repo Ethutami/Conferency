@@ -80,7 +80,14 @@ function FloatingTicket({ start_date, price }: { start_date: string, price: stri
 
 const Banner = ({ data }: { data: Event }) => {
     return (
-        <section className="w-full bg-gradient-to-l from-[#024CAA] to-[#DBD3D3] py-4 md:py-16">
+        <section className="
+  w-full 
+  bg-gradient-to-l from-[#DBD3D3] to-[#024CAA] 
+  md:from-[#024CAA] md:to-[#DBD3D3] 
+  dark:from-[var(--muted)]  dark:to-[var(--secondary)]  
+  dark:md:from-[var(--secondary)]  dark:md:to-[var(--muted)]
+  py-4 md:py-16
+">
             <div className="mx-auto px-4 md:px-8 lg:px-16 flex flex-col-reverse md:grid md:grid-cols-2">
                 <div className="text-left">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-white md:text-blue-900 leading-tight">
