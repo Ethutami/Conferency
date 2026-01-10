@@ -10,3 +10,12 @@ export async function fetchCategories() {
         console.error('Something Wrong:', error);
     }
 }
+export async function fetchCategoriesById(id: number) {
+    try {
+        const response = await axios.get(`${url}/${id}`);
+
+        return response?.data?.data
+    } catch (error) {
+        console.error('Something Wrong:', error);
+    }
+}
