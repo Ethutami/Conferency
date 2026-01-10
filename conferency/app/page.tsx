@@ -1,5 +1,8 @@
 "use client"
+import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { store } from "@/store/store";
+
 import CarouselComponent from "./components/carousel";
 import Categories from "./components/categories";
 import EventCard from "./components/event-card";
@@ -9,17 +12,19 @@ const queryClient = new QueryClient();
 
 export default function Home() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="relative pb-10">
-        <Navbar />
-        <div className="pt-20">
-          <CarouselComponent />
-          <Categories />
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <div className="relative pb-10">
+          <Navbar />
+          <div className="pt-20">
+            <CarouselComponent />
+            <Categories />
+          </div>
+          <div className="px-4 md:px-8 lg:px-16">
+            <EventCard />
+          </div>
         </div>
-        <div className="px-4 md:px-8 lg:px-16">
-          <EventCard />
-        </div>
-      </div>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 }

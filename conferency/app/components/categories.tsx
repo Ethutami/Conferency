@@ -3,12 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { useDispatch } from "react-redux";
+
+import { AppDispatch } from "@/store/store";
 
 import { fetchCategories } from "@/services/categories.service";
 import iCategory from "@/interfaces/categories.interface";
 import { TitleSection } from "./titleSection";
+import { categoryFilter } from "@/store/eventsSlice";
 
 export default function Categories() {
+    const dispatch = useDispatch<AppDispatch>();
+
     const [categories, setCategories] = useState<iCategory[]>([]);
     const prevRef = useRef<HTMLButtonElement | null>(null);
     const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -91,7 +97,10 @@ export default function Categories() {
                 >
                     {categories.map((item) => (
                         <SwiperSlide key={item.id} className="!w-auto">
-                            <button className="muted-color flex flex-col md:flex-row items-center gap-2 px-3 py-2 rounded-lg transition-colors">
+                            <button
+                                onClick={() => dispatch(categoryFilter(Number(item.id)))}
+
+                                className="muted-color flex flex-col md:flex-row items-center gap-2 px-3 py-2 rounded-lg transition-colors">
                                 <div className="rounded-[8px] md:border-none border border-[#EC8305] w-30 h-18 md:w-auto md:h-auto items-center justify-center flex">
                                     <Image
                                         src={item.icon}
