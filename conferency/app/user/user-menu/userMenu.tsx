@@ -36,8 +36,8 @@ export default function UserMenu({
     onChange,
 }: Props) {
     return (
-        <aside className="w-[320px] rounded-xl bg-white shadow-md">
-            <div className="px-6 py-4 text-sm font-semibold text-gray-300">
+        <aside className="w-[320px] rounded-xl shadow-md">
+            <div className="px-6 py-4 text-sm font-semibold text-[#DBD3D3]">
                 Navigation Profile
             </div>
 
@@ -51,8 +51,8 @@ export default function UserMenu({
                             onClick={() => onChange(menu.key)}
                             className={`flex w-full items-center gap-3 px-6 py-4 text-left transition
                 ${isActive
-                                    ? 'bg-blue-700 text-white'
-                                    : 'text-gray-300 hover:bg-gray-50'
+                                    ? 'bg-[#024CAA] text-white'
+                                    : 'text-[#DBD3D3] hover:bg-gray-50'
                                 }`}
                         >
                             {menu.icon}

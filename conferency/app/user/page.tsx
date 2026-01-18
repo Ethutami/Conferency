@@ -2,14 +2,15 @@
 
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import MyProfilePage from './profile/page';
-import { UserTab } from '@/interfaces/user';
 import Navbar from '../components/navbar';
-import UserMenu from './user-menu/page';
-import MyEventsPage from './my-events/page';
-import FeedbackPage from './feedback/page';
-import TransactionHistoryPage from './transaction-story/page';
-import VoucherPage from './voucher/page';
+import MyProfilePage from './profile/profilePage';
+import UserMenu from './user-menu/userMenu';
+import MyEventsPage from './my-events/EventPage';
+import FeedbackPage from './feedback/feedbackPage';
+import TransactionHistoryPage from './transaction-history/TransactionPage';
+import VoucherPage from './voucher/voucherPage';
+
+import { UserTab } from '@/interfaces/user';
 
 const queryClient = new QueryClient();
 
