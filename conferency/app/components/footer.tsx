@@ -5,8 +5,9 @@ import Logo from "./logo"
 
 export default function Footer() {
     return (
-        <div >
-            <div className="flex flex-col items-center md:flex-row md:justify-between mb-16 px-4 md:px-8 lg:px-16 mt-10">
+        <div className="mt-10" >
+            <div className="hidden md:block border-t border-[var(--muted)] dark:border-[var(--secondary)] "></div>
+            <div className="flex flex-col items-center md:flex-row md:justify-between mb-16 mt-10 px-4 md:px-8 lg:px-16">
                 <div className="flex flex-col gap-4">
                     <Logo />
                     <p className="hidden md:block font-medium text-sm leading-normal text-[var(--muted)] italic">
