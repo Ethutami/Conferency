@@ -4,6 +4,7 @@ import CarouselComponent from "./components/carousel";
 import Categories from "./components/categories";
 import EventCard from "./components/event-card";
 import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ export default function Home() {
           <EventCard />
         </div>
       </div>
+      <Footer />
     </QueryClientProvider>
   );
 }
