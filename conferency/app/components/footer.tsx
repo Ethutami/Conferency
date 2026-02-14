@@ -20,15 +20,27 @@ export default function Footer() {
                 <div className="flex flex-col gap-4 mt-4">
                     <p className="hidden md:block tertiary-title ">Contact & Support</p>
                     <div className="flex flex-row md:flex-col md:gap-4 lg:flex-row gap-6 ">
-                        <span className="flex items-center gap-2 text-xs md:text-sm text-[var(--base)] hover:text-[var(--secondary)] cursor-pointer transition-colors">
+                        <a
+                            href="https://mail.google.com/mail/?view=cm&fs=1&to=ehtutami@gmail.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-xs md:text-sm text-[var(--base)] hover:text-[var(--secondary)] cursor-pointer transition-colors">
                             <FiMail /><span>Ehtutami@gmail.com</span>
-                        </span>
-                        <span className="flex items-center gap-2 text-xs md:text-sm text-[var(--base)] hover:text-[var(--secondary)] cursor-pointer transition-colors">
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/ethikautami/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-xs md:text-sm text-[var(--base)] hover:text-[var(--secondary)] cursor-pointer transition-colors">
                             <FiLinkedin /><span>Ehtutami</span>
-                        </span>
-                        <span className="flex items-center gap-2 text-xs md:text-sm text-[var(--base)] hover:text-[var(--secondary)] cursor-pointer transition-colors">
-                            <FiInstagram /><span>@_Ehtuta</span>
-                        </span>
+                        </a>
+                        <a
+                            href="https://www.instagram.com/_ethuta/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-xs md:text-sm text-[var(--base)] hover:text-[var(--secondary)] cursor-pointer transition-colors">
+                            <FiInstagram /><span>@_Ethuta</span>
+                        </a>
                     </div>
                 </div>
                 <div></div>
