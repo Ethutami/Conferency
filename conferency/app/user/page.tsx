@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import Navbar from '../components/navbar';
+import UserMenu from './user-menu/userMenu';
 import MyProfilePage from './profile/profilePage';
 import FeedbackPage from './feedback/feedbackPage';
 import VoucherPage from './voucher/voucherPage';
 import MyEventsPage from './my-events/eventPage';
 import TransactionHistoryPage from './transaction-history/transactionPage';
-import UserMenu from './user-menu/userMenu';
 
 import { UserTab } from '@/interfaces/user';
 
