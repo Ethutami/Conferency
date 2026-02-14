@@ -9,7 +9,6 @@ import {
     CreditCard,
 } from 'lucide-react';
 
-
 interface Props {
     activeTab: UserTab;
     onChangeAction: (tab: UserTab) => void;
