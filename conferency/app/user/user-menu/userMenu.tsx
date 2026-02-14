@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { UserTab } from '@/interfaces/user';
 import {
@@ -12,7 +12,7 @@ import {
 
 interface Props {
     activeTab: UserTab;
-    onChange: (tab: UserTab) => void;
+    onChangeAction: (tab: UserTab) => void;
 }
 
 const menus: {
@@ -33,7 +33,7 @@ const menus: {
 
 export default function UserMenu({
     activeTab,
-    onChange,
+    onChangeAction,
 }: Props) {
     return (
         <aside className="w-[320px] rounded-xl shadow-md">
@@ -48,9 +48,9 @@ export default function UserMenu({
                     return (
                         <button
                             key={menu.key}
-                            onClick={() => onChange(menu.key)}
+                            onClick={() => onChangeAction(menu.key)}
                             className={`flex w-full items-center gap-3 px-6 py-4 text-left transition
-                ${isActive
+                                ${isActive
                                     ? 'bg-[#024CAA] text-white'
                                     : 'text-[#DBD3D3] hover:bg-gray-50'
                                 }`}
