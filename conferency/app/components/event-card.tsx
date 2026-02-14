@@ -27,10 +27,7 @@ export default function EventCard() {
                             shadow-md shadow-[#EC8305] dark:shadow-[#fff] hover:shadow-md 
                             hover:bg-orange-500/10 dark:hover:bg-orange-500/30  transition overflow-hidden
                             flex flex-col justify-between">
-                            <div className="flex flex-col-reverse lg:flex-row">
-                                <p className="primary-title md:mr-2">
-                                    {item.event_name}
-                                </p>
+                            <div className="flex flex-col-reverse lg:flex-col">
                                 <Image
                                     src={item.img ?? '/banner1.png'}
                                     width={100}
@@ -38,9 +35,12 @@ export default function EventCard() {
                                     alt="image"
                                     className="w-auto h-auto"
                                 />
+                                <p className="primary-title md:mr-2">
+                                    {item.event_name}
+                                </p>
                             </div>
                             <div>
-                                <p className="mt-6 muted-color hover:!text-[#DBD3D3]">{formatEventDate(item?.start_date, "short")}</p>
+                                <p className="mt-2 muted-color hover:!text-[#DBD3D3]">{formatEventDate(item?.start_date, "short")}</p>
                                 <p className="secondary-title mt-2">{item?.price}</p>
                                 <PrimaryButton title="Buy Now" style="py-1 px-2" />
                             </div>
