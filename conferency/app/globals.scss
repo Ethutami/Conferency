@@ -7,12 +7,7 @@
   --secondary: #EC8305;
   --muted: #DBD3D3;
   --font-weight-semibold: 600;
-}
-
-%primary-title {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 16px;
+  --base: #091057;
 }
 
 .active-color {
@@ -37,12 +32,24 @@
   font-size: 20px;
 }
 
+%primary-title {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 16px;
+}
+
 .primary-title {
   @extend %primary-title;
 }
 
 .secondary-title {
   color: var(--secondary);
+  font-weight: var(--font-weight-semibold);
+  font-size: 20px;
+}
+
+.tertiary-title {
+  color: var(--muted);
   font-weight: var(--font-weight-semibold);
   font-size: 20px;
 }
@@ -130,6 +137,7 @@
     --background: #111111;
     --foreground: #ffffff;
     --card: #000000;
+    --base: #ffffff;
   }
 
   .section-title {
@@ -138,6 +146,10 @@
 
   .primary-title {
     color: var(--foreground);
+  }
+
+  .tertiary-title {
+    color: var(--base);
   }
 
   .tab-active {

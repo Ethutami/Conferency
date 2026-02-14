@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -25,7 +25,7 @@ export default function UserPage() {
                 <div className="flex flex-row pt-10 px-4 md:px-8 lg:px-16">
                     <UserMenu
                         activeTab={activeTab}
-                        onChange={setActiveTab}
+                        onChangeAction={setActiveTab}
                     />
                     <div className='px-2 md:px-6 lg:px-12'></div>
                     <main className="flex flex-1 rounded-xl bg-white p-6 shadow-md">
